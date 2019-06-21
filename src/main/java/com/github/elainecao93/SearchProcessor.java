@@ -132,14 +132,14 @@ public class SearchProcessor {
 
         //add all possible outputs
         System.out.println("Query: " + this.query);
-        HashMap<String, Double> possibleOutputs = new HashMap<>();
+        HashMap<Rule, Double> possibleOutputs = new HashMap<>();
         for (int i=0; i<rules.size(); i++) {
             if (this.filter != null && (!this.filter.matches(rules.get(i).getSource().toString().toLowerCase())))
                 continue;
             String ruleStr = rules.get(i).toString();
             double relevancy = rules.get(i).relevancy(this.query);
             if (relevancy < 99.0) {
-                possibleOutputs.put(ruleStr, relevancy);
+                possibleOutputs.put(rules.get(i), relevancy);
             }
             if (possibleOutputs.size() > 100) {
                 this.output.add("Over 100 results were found. Please filter your request.");
@@ -147,33 +147,41 @@ public class SearchProcessor {
             }
         }
 
-        int resultsNum = userIsAdmin == 0 ? MAX_RESULTS : MAX_RESULTS_IF_ADMIN;
-
         //sort for relevancy
-        Set<Map.Entry<String, Double>> outputs = possibleOutputs.entrySet();
-        Comparator<Map.Entry<String, Double>> comparator = new Comparator<Map.Entry<String, Double>>() {
+        Set<Map.Entry<Rule, Double>> outputs = possibleOutputs.entrySet();
+        Comparator<Map.Entry<Rule, Double>> relevancyComparator = new Comparator<Map.Entry<Rule, Double>>() {
             @Override
-            public int compare(Map.Entry<String, Double> e1, Map.Entry<String, Double> e2) {
+            public int compare(Map.Entry<Rule, Double> e1, Map.Entry<Rule, Double> e2) {
                 return e1.getValue().compareTo(e2.getValue());
             }
         };
-        ArrayList<Map.Entry<String, Double>> outputList = new ArrayList<>(outputs);
-        outputList.sort(comparator);
+        List<Map.Entry<Rule, Double>> outputList = new ArrayList<>(outputs);
+        outputList.sort(relevancyComparator);
 
-        //return results
-        for (int i=0; i<outputList.size(); i++) {
-            this.output.add(outputList.get(i).getKey());
-            if (i > resultsNum-2)
-                break;
+        //truncate to the correct number of results
+        int resultsNum = userIsAdmin == 0 ? MAX_RESULTS : MAX_RESULTS_IF_ADMIN;
+        int resultsFound = outputList.size();
+        if (resultsNum < outputList.size()) {
+            outputList = outputList.subList(0, resultsNum);
         }
 
-        Collections.sort(this.output);
+        //sort output
+        ArrayList<Rule> outputRules = new ArrayList<>();
+        for (int i=0; i<outputList.size(); i++) {
+            outputRules.add(outputList.get(i).getKey());
+        }
+        Collections.sort(outputRules);
 
-        if (outputList.size() > resultsNum){
+        //return results
+        for (int i=0; i<outputRules.size(); i++) {
+            this.output.add(outputRules.get(i).toString());
+        }
+
+        if (resultsFound > resultsNum){
             if (userIsAdmin == 1)
-                this.output.add(0, outputList.size() + " results were found. Displaying the " + resultsNum + " most relevant results because an administrator command was run. Use !filter to filter.");
+                this.output.add(0, resultsFound + " results were found. Displaying the " + resultsNum + " most relevant results because an administrator command was run. Use !filter to filter.");
             else
-                this.output.add(0, outputList.size() + " results were found. Displaying the " + resultsNum + " most relevant results. Use !filter to filter.");
+                this.output.add(0, resultsFound + " results were found. Displaying the " + resultsNum + " most relevant results. Use !filter to filter.");
         }
 
         this.output.add("Computed in " + (System.currentTimeMillis() - computeStart + " ms"));

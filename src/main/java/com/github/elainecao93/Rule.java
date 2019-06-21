@@ -1,11 +1,13 @@
 package com.github.elainecao93;
 
-public class Rule{
+public class Rule implements Comparable<Rule>{
 
 
     private RuleSource source;
     private String citation;
     private String ruleText;
+    public int ruleNum;
+    private static int ruleIndex = 0;
 
     public Rule(RuleSource source, String rawText, String breakchar, boolean breakline) {
         this.source = source;
@@ -26,7 +28,8 @@ public class Rule{
         if (breakline) {
             this.ruleText = this.ruleText.replace("\n", " ").replace("\r", " ").replace("  ", " ");
         }
-
+        this.ruleNum = ruleIndex;
+        ruleIndex++;
     }
 
     //lower output is more relevant.
@@ -55,4 +58,8 @@ public class Rule{
         return source.toString() + " " + citation + ": " + ruleText;
     }
 
+    @Override
+    public int compareTo(Rule o) {
+        return this.ruleNum - ((Rule)o).ruleNum;
+    }
 }
