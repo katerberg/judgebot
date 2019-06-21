@@ -29,7 +29,8 @@ public class SearchProcessor {
         readFile("/CR.txt", 750000, " ", RuleSource.CR, false);
         readFile("/CR_glossary.txt", 100000, "\n", RuleSource.CRG, true);
         readFile("/JAR.txt", 10000, null, RuleSource.JAR, true);
-
+        readFile("/IPG.txt", 100000, null, RuleSource.IPG, false);
+        readFile("/MTR.txt", 100000, null, RuleSource.MTR, false);
     }
 
     private static void readFile(String filename, int bufferlen, String breakchar, RuleSource source, boolean breakline) throws IOException {
@@ -37,18 +38,57 @@ public class SearchProcessor {
         byte[] buffer = new byte[bufferlen];
         System.out.println(in.read(buffer));
 
-        String[] inputArray = new String(buffer, "UTF-8").split("\\r?\\n\\r?\\n");
-        for (int i=0; i<inputArray.length; i++) {
-            if (inputArray[i].length() > 1) {
-                rules.add(new Rule(source, inputArray[i], breakchar, breakline));
+        if (source == RuleSource.IPG || source == RuleSource.MTR) {
+            ArrayList<String> input = parseFile(buffer);
+            for (int i=0; i<input.size(); i++) {
+                rules.add(new Rule(source, input.get(i), breakchar, breakline));
+            }
+        }
+        else {
+            String[] inputArray = new String(buffer, "UTF-8").split("\\r?\\n\\r?\\n");
+            for (int i = 0; i < inputArray.length; i++) {
+                if (inputArray[i].length() > 1) {
+                    rules.add(new Rule(source, inputArray[i], breakchar, breakline));
+                }
             }
         }
     }
 
-    private ArrayList<String> parseFile(byte[] buffer) throws IOException {
-        ArrayList<String> output = new ArrayList<String>();
+    public static ArrayList<String> parseFile(byte[] buffer) throws IOException {
+        ArrayList<String> output = new ArrayList<>();
         String[] inputString = new String(buffer, "UTF-8").split("\\r\\n");
         ArrayList<String> input = new ArrayList<>(Arrays.asList(inputString));
+
+        String currentTitle = "";
+        String currentSubsection = "";
+        String currentRule = "";
+
+        for (int i=0; i<input.size(); i++) {
+            int len = input.get(i).length();
+            String elem = input.get(i);
+            if (len < 3) continue; //page number
+            else if (!Character.isAlphabetic(elem.charAt(elem.length()-1)) && len < 90) { //end of paragraph
+                currentRule += " " + elem;
+                output.add(currentTitle + " " + currentSubsection + " " + currentRule);
+                currentRule = "";
+            }
+            else if (Character.isDigit(elem.charAt(0))) { // is a title
+                if (currentRule.length() > 3)
+                    output.add(currentTitle + " " + currentSubsection + " " + currentRule);
+                currentSubsection = "";
+                currentRule = "";
+                currentTitle = elem;
+            }
+            else if (elem.length() < 40) { //is a subsection header
+                if (currentRule.length() > 3)
+                    output.add(currentTitle + " " + currentSubsection + " " + currentRule);
+                currentSubsection = elem;
+                currentRule = "";
+            }
+            else {
+                currentRule += " " + elem;
+            }
+        }
 
         return output;
     }
@@ -100,6 +140,10 @@ public class SearchProcessor {
             double relevancy = rules.get(i).relevancy(this.query);
             if (relevancy < 99.0) {
                 possibleOutputs.put(ruleStr, relevancy);
+            }
+            if (possibleOutputs.size() > 100) {
+                this.output.add("Over 100 results were found. Please filter your request.");
+                return this.output;
             }
         }
 

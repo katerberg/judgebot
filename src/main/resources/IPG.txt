@@ -7,12 +7,10 @@ violate rules or policy, and promote fair play and sporting conduct by example a
 Judges may intervene to prevent or preempt errors occurring outside of a game. Knowledge of a
 player’s history or skill does not alter an infraction, but it may be taken into account during an
 investigation.
-
 The purpose of a penalty is to educate the player not to make similar mistakes in the future. This
 is done through both an explanation of where the rules or policies were violated and a penalty to
 reinforce the education. Penalties are also for the deterrence and education of every other player
 in the event and are also used to track player behavior over time.
-
 If a minor violation is quickly handled by the players to their mutual satisfaction, a judge does
 not need to intervene. If the players are playing in a way that is clear to both players, but might
 cause confusion to an external observer, judges are encouraged to request that the players make
@@ -27,7 +25,6 @@ set, etc. The Rules Enforcement Level, round of the tournament, age or experienc
 player, desire to educate the player, and certification level of the judge are NOT exceptional
 circumstances. If another judge feels deviation is appropriate, they must consult with the Head
 Judge.
-
 Judges are human and make mistakes. When a judge makes a mistake, they should acknowledge
 the mistake, apologize to the players, and fix it if it is not too late. If a member of the tournament
 staff gives a player erroneous information that causes them to commit a violation, the Head
@@ -37,50 +34,41 @@ these cards, the Head Judge applies the normal procedure for fixing the decklist
 downgrade the penalty to a Warning because of the direct error of the judge. If a player clearly
 acts on erroneous information provided by a judge during the game, the Head Judge may
 consider a backup to the point of the action taken, even if that action did not lead to a violation.
-
 1.1. DEFINITION OF PENALTIES
 Warning
 Warnings are used in situations of incorrect play when a small amount of time is needed to
 implement the corrective procedure. The purpose of a Warning is to alert judges and players
 involved that a problem has occurred and to keep a permanent record of the infraction. A time
 extension should be issued if the ruling has taken more than a minute.
-
 Game Loss
 A Game Loss ends the current game immediately and the player who committed the infraction is
 considered to have lost the game for the purpose of match reporting. The player receiving a
 Game Loss chooses whether to play or draw in the next game of that match, if applicable. If a
 Game Loss is issued before the match begins, neither player in that match may use sideboards (if
 the tournament uses them) for the first game they play.
-
 Game Losses are applied immediately if the game is still ongoing, or to the player’s next game if
 it is not, unless otherwise specified. If a player would receive two or more Game Losses at the
 same time, they only receive one. If simultaneous Game Loss penalties are issued to each player,
 they are recorded, but do not affect the match score
-
 Match Loss
 A Match Loss is a severe penalty that is usually issued when the match itself has been
 compromised.
-
 Match Losses are applied to the match during which the offense occurred unless the offender’s
 match has already ended, in which case the penalty will be applied to that player’s next match.
-
 Disqualification
 A Disqualification is issued for activity that damages the integrity of a tournament as a whole or
 for severe unsporting conduct.
-
 The recipient of a Disqualification does not need to be a player in the tournament. They may be a
 spectator or other bystander. If this happens, they must be entered into the tournament in
 Wizards Event Reporter (“WER”) so that they may be disqualified and reported to the DCI.
 Disqualification can occur without proof of action so long as the Head Judge determines
 sufficient information exists to believe the tournament’s integrity may have been compromised.
 It is recommended that the Head Judge’s report reflect this fact.
-
 When this penalty is applied, the player loses their current match and is dropped from the
 tournament. If a player has already received prizes at the time they are disqualified, that player
 may keep those prizes but does not receive any additional prizes or awards they may be due. A
 player that is disqualified from a tournament does not receive Planeswalker Points or
 Professional Points for that tournament.
-
 When a player is disqualified during a tournament, they are removed from the tournament and do
 not take up a place in the standings. This means that all players in the tournament will advance
 one spot in the standings and are entitled to any prizes the new standing would offer. If the
@@ -89,26 +77,21 @@ disqualified player although they do move up a spot in the standings. For exampl
 disqualified during the quarterfinal round of a Magic Tabletop Mythic Qualifier, the former 9th
 place finisher does not advance into the single elimination top 8, but they do move into 8th place
 in the standings.
-
 More information about the Disqualification process may be found at
 http://blogs.magicjudges.org/o/disqualification-process/.
-
 1.2. APPLYING PENALTIES
 Penalties are included with the tournament report so that a permanent record can be kept in the
 DCI Penalty Database. Additionally, any penalty of Game Loss or higher should be reported to
 the Head Judge, and it is recommended that only the Head Judge issue penalties of this nature
 (with the exception of Tardiness (3.1) and Decklist Problems (3.4)).
-
 Being enrolled in the tournament is not a requirement to receive a penalty. Although these
 guidelines refer to players, other people in the venue, such as spectators, staff, or judges may be
 enrolled into (and dropped from) the tournament in order to receive a penalty. Penalties are still
 issued even if a player drops from the tournament before it would take effect.
-
 Any time a penalty is issued, the judge must explain the infraction, the procedure for fixing the
 situation, and the penalty to all players involved. If the Head Judge chooses to deviate from the
 Infraction Procedure Guide, the Head Judge is expected to explain the standard penalty and the
 reason for deviation.
-
 Some infractions include remedies to handle the offense beyond the base penalty. These
 procedures exist to protect officials from accusations of unfairness, bias, or favoritism. If a judge
 makes a ruling that is consistent with quoted text, then the complaints of a player shift from
@@ -119,9 +102,7 @@ played, the current situation that the game is in, or who will benefit strategic
 procedure associated with a penalty. While it is tempting to try to “fix” game situations, the
 danger of missing a subtle detail or showing favoritism to a player (even unintentionally) makes
 it a bad idea.
-
 If an error leads to multiple related infractions, only issue one with the most severe penalty.
-
 1.3. RANDOMIZING A LIBRARY
 The remedy for some infractions in this document includes shuffling the randomized portion of
 the library. This requires first determining whether any portion of the library is non-random, such
@@ -129,9 +110,7 @@ as cards that have been manipulated on the top or bottom of the library, and sep
 Check with both players to verify this, and check the graveyard, exile, and battlefield for library
 manipulation cards, such as Brainstorm and cards with the scry mechanic. Once the library has
 been shuffled, any manipulated cards are returned to their correct locations.
-
 Shuffles performed by a judge as part of a remedy are not considered shuffles for game purposes.
-
 1.4. BACKING UP
 Some infractions in this document permit the judge to consider the possibility of a backup. Due
 to the amount of information that may become available to players and might affect their play,
@@ -140,10 +119,8 @@ game in the current state is a substantially worse solution. A good backup will 
 situation where the gained information makes no difference and the line of play remains the
 same (excepting the error, which has been fixed). This means limiting backups to situations with
 minimal decision trees.
-
 Only the Head Judge may authorize a backup. At large tournaments, they may choose to delegate
 this responsibility to Team Leaders.
-
 To perform a backup, each individual action since the point of the error is reversed, starting with
 the most recent ones and working backwards. Every action must be reversed; no parts of the
 sequence should be omitted or reordered. If the identity of a card involved in reversing an action
@@ -152,38 +129,31 @@ the possible candidates. Actions that caused a player to learn the identity of c
 location in the library are reversed by shuffling those cards into the random portion of the library
 unless they were subsequently drawn; cards being returned to the library as part of the backup
 should not be shuffled at that stage if their identity was known to only one player.
-
 Backups involving random/unknown elements should be approached with extreme caution,
 especially if they cause or threaten to cause a situation in which a player will end up with
 different cards than they would once they have correctly drawn those cards. For example,
 returning cards to the library when a player has the ability to shuffle their library is not
 something that should be done except in extreme situations.
-
 Some remedies state a simple backup may be performed. A simple backup is backing up the last
 action completed (or one currently in progress) and is sometimes used to make another portion of
 the prescribed remedy smoother. A simple backup should not involve any random elements.
-
 1.5. SETS
 Some infractions in this document refer to “sets” of cards. A set is a physically distinct group of
 cards defined by a game rule or effect. It may correspond to a specific zone, or may only
 represent a part of a zone. A set may consist of a single card.
 Cards are considered to be part of a set until they join another set. There is no in-between state
 and any card that has not yet been seen is part of the previous set (unless the new set is hidden).
-
 2. GAME PLAY ERRORS
 Game Play Errors are caused by incorrect or inaccurate play of the game such that it results in
 violations of the Magic Comprehensive Rules. Many offenses fit into this category and it would
 be impossible to list them all. The guide below is designed to give judges a framework for
 assessing how to handle a Game Play Error.
-
 Most Game Play Error infractions are assumed to have been committed unintentionally. If the
 judge believes that the error was intentional, they should first consider whether an Unsporting
 Conduct — Cheating infraction has occurred.
-
 With the exception of Failure to Maintain Game State, which is never upgraded, the third or
 subsequent penalty for a Game Play Error offense in the same category is upgraded to a Game
 Loss. For multi-day tournaments, the penalty count for these infractions resets between days.
-
 2.1. Game Play Error — Missed Trigger No Penalty
 Definition
 A triggered ability triggers, but the player controlling the ability doesn’t demonstrate awareness
@@ -933,73 +903,3 @@ E. A player peeks at another player’s picks during the draft.
 F. A player adds cards to their Sealed Deck pool.
 G. A player realizes they have accidentally drawn an extra card, then fails to call a judge in
 order to avoid a penalty.
-29
-APPENDIX A — PENALTY QUICK REFERENCE
-Infraction Penalty
-Game Play Errors
-Missed Trigger None
-Looking at Extra Cards Warning
-Hidden Card Error Warning
-Mulligan Procedure Error Warning
-Game Rule Violation Warning
-Failure to Maintain Game State Warning
-Tournament Errors
-Tardiness Game Loss
-Outside Assistance Match Loss
-Slow Play Warning
-Decklist Problem Game Loss
-Deck Problem Warning
-Limited Procedure Violation Warning
-Communication Policy Violation Warning
-Marked Cards Warning
-Insufficient Shuffling Warning
-Unsporting Conduct
-Unsporting Conduct — Minor Warning
-Unsporting Conduct — Major Match Loss
-Improperly Determining a Winner Match Loss
-Bribery and Wagering Match Loss
-Aggressive Behavior Disqualification
-Theft of Tournament Material Disqualification
-Stalling Disqualification
-Cheating Disqualification
-30
-APPENDIX B — CHANGES FROM PREVIOUS VERSIONS
-May 3, 2019
-1.1: If you would issue two game losses to a player, only issue one.
-2.2: Now covers accidentally looking at a sideboard as well.
-3.7: Players have to have made an in-game decision for CPV to be a consideration.
-January 21, 2019
-2.1: No more special handling for default triggers. Revised guidance for zone change cleanups.
-2.1: Detrimental trigger assessment includes whether you own the card that caused the trigger.
-2.3: Clarification of the boundary with Looking at Extra Cards.
-2.3: Cards being returned go to the original location, not just top-of-library.
-2.5: Zone change partial fix does not require known identity.
-3: Moved multi-day tournament penalty resets back to end of day (matches section 2).
-3.5: When shuffling cards back in from the sideboard, only choose from cards originally in the deck.
-3.6: Players moving their heads inappropriately can be a Limited Procedure Violation.
-4.3: Now baseline Match Loss. Knowing that it’s illegal makes it Cheating.
-4.3: Tricking your opponent into improper determination is also improper determination.
-4.3: Players are no longer required to report proposals to a Tournament Official.
-4.4: Now baseline Match Loss. Knowing that it’s illegal makes it Cheating.
-4.4: Tricking your opponent into making a bribery offer or wager is also illegal.
-4.4: Players are no longer required to report proposals to a Tournament Official.
-October 5, 2018
-1: Head Judges may back up decisions caused by judge error.
-2: Moved multi-day tournament penalty resets back to end of day.
-2.5: Partial fixes can cross categories as long as all the remedy falls into one of the categories.
-2.5: Permanents are the only type of object that untaps.
-3.2: Using private information instead of hidden information for what a player might seek.
-3.4: Planeswalkers are now legendary.
-3.4: Players decide where excess cards are removed from.
-3.5: Final upgrade example reworded to be clearer.
-3.9: Better wording to handle effects that only shuffle a set of cards in the deck.
-July 13, 2018
-1: Clearer wording around when a Game Loss is issued.
-2.5: Add missed untapping at the start of turn to partial fixes.
-3.1: Players have to get permission to be tardy, not just request it.
-3.4: Rewording the scope of deferred decklist errors. Most happen immediately.
-3.5: No upgrade if all copies of a card with too many copies are still in the library.
-3.7: Choosing not to act based on erroneous information may qualify for CPV.
-3.8: Removing the sleeve qualification from Example B, as it was not necessary.
-3.8: Updating the lands that can be added. Clarifying that a Game Loss is issued if the list is changed.
-All trademarks are property of Wizards of the Coast LLC in the U.S.A. and other countries. ©2019 Wizards.

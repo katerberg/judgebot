@@ -56,9 +56,9 @@ public class init {
     }
 
     public static ArrayList<String> parseCommand(String input, boolean isAdmin) {
-        if (input.length() < 3) {
+        if (input.length() < 4) {
             ArrayList<String> output = new ArrayList<>();
-            output.add("To prevent abuse, queries of less than three characters are not allowed.");
+            output.add("To prevent abuse, queries of three or less characters are not allowed.");
             return output;
         }
         if (input.indexOf("!") == 0) {
