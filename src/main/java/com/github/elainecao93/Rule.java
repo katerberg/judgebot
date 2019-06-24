@@ -43,8 +43,7 @@ public class Rule implements Comparable<Rule>{
         }
         String thisString = this.toString().toLowerCase();
         int firstAppearance = thisString.indexOf(queryWords[0]);
-        double relevancy = 0;
-        relevancy = firstAppearance / (double)this.toString().length();
+        double relevancy = (double)firstAppearance / 1000;
         for (int i=0; i<queryWords.length; i++) {
             int indexOfQuery = thisString.indexOf(queryWords[i]);
             if (indexOfQuery == -1)

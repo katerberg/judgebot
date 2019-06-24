@@ -64,6 +64,8 @@ public class SearchProcessor {
         String currentSubsection = "";
         String currentRule = "";
 
+        System.out.println(input.size() + " len");
+
         for (int i=0; i<input.size(); i++) {
             int len = input.get(i).length();
             String elem = input.get(i);
@@ -144,10 +146,6 @@ public class SearchProcessor {
             if (relevancy < 99999) {
                 possibleOutputs.put(rules.get(i), relevancy);
             }
-            if (possibleOutputs.size() > 100) {
-                this.output.add("Over 100 results were found. Please filter your request.");
-                return this.output;
-            }
         }
 
         //sort for relevancy
@@ -155,7 +153,10 @@ public class SearchProcessor {
         Comparator<Map.Entry<Rule, Double>> relevancyComparator = new Comparator<Map.Entry<Rule, Double>>() {
             @Override
             public int compare(Map.Entry<Rule, Double> e1, Map.Entry<Rule, Double> e2) {
-                return e1.getValue().compareTo(e2.getValue());
+                int relevancyDiff = e1.getValue().compareTo(e2.getValue());
+                if (relevancyDiff != 0)
+                    return relevancyDiff;
+                return e1.getKey().compareTo(e2.getKey());
             }
         };
         List<Map.Entry<Rule, Double>> outputList = new ArrayList<>(outputs);

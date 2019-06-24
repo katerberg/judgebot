@@ -21,10 +21,18 @@ public class init {
 
         api.addMessageCreateListener(event -> {
             MessageAuthor ma = event.getMessageAuthor();
+            if (ma.asUser().isPresent() && ma.asUser().get().isBot())
+                return;
             boolean isBotOwner = (ma.asUser().isPresent() && ma.asUser().get().isBotOwner());
-            if (isBotOwner && event.getMessageContent().toLowerCase().matches("judgebot, stop")) {
-                event.getChannel().sendMessage("Shutting down by owner's request.");
-                System.exit(0);
+            if (isBotOwner) {
+                if (event.getMessageContent().toLowerCase().matches("judgebot, stop")) {
+                    event.getChannel().sendMessage("Shutting down by owner's request.");
+                    System.exit(0);
+                }
+                if (event.getMessageContent().toLowerCase().matches("!verify")) {
+                    event.getChannel().sendMessage("hi mom");
+                    return;
+                }
             }
             boolean isAdmin = ma.canBanUsersFromServer() || isBotOwner;
             ArrayList<String> commands = getCommand(event.getMessageContent());
@@ -56,9 +64,9 @@ public class init {
     }
 
     public static ArrayList<String> parseCommand(String input, boolean isAdmin) {
-        if (input.length() < 4) {
+        if (input.length() < 3) {
             ArrayList<String> output = new ArrayList<>();
-            output.add("To prevent abuse, queries of three or less characters are not allowed.");
+            output.add("To prevent abuse, queries of two or less characters are not allowed.");
             return output;
         }
         if (input.indexOf("!") == 0) {
