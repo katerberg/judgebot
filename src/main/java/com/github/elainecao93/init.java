@@ -65,7 +65,14 @@ public class init {
             HelpProcessor hp = new HelpProcessor(input, isAdmin);
             return hp.getOutput();
         }
-        SearchProcessor sp = new SearchProcessor(input, isAdmin);
+        SearchProcessor sp;
+        if (input.matches("\".*\"")) {
+            input = input.substring(1, input.length()-1);
+            System.out.println(input);
+            sp = new SearchProcessor(input, isAdmin, true);
+        } else {
+            sp = new SearchProcessor(input, isAdmin, false);
+        }
         return sp.getOutput();
     }
 

@@ -18,7 +18,7 @@ public class Rule implements Comparable<Rule>{
         else {
             int breakIndex = rawText.indexOf(breakchar);
             try {
-                this.citation = rawText.substring(0, breakIndex - 1);
+                this.citation = rawText.substring(0, breakIndex);
                 this.ruleText = rawText.substring(breakIndex + 1);
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("error: " + rawText.length());
@@ -33,19 +33,27 @@ public class Rule implements Comparable<Rule>{
     }
 
     //lower output is more relevant.
-    public double relevancy(String query) {
-        String[] queryWords = query.split(" ");
-        String thisLower = this.toString().toLowerCase();
-        int firstAppearance = thisLower.indexOf(queryWords[0]);
-        double relevancy = firstAppearance / (double)this.toString().length();
+    public double relevancy(String query, boolean exactMatch) {
+        String[] queryWords;
+        if (exactMatch) {
+            queryWords = new String[1];
+            queryWords[0] = query;
+        } else {
+            queryWords = query.split(" ");
+        }
+        String thisString = this.toString().toLowerCase();
+        int firstAppearance = thisString.indexOf(queryWords[0]);
+        double relevancy = 0;
+        relevancy = firstAppearance / (double)this.toString().length();
         for (int i=0; i<queryWords.length; i++) {
-            if (!thisLower.contains(queryWords[i]))
-                return 99;
-            if (!thisLower.matches(".*\\W" + queryWords[i] + "\\W.*"))
+            int indexOfQuery = thisString.indexOf(queryWords[i]);
+            if (indexOfQuery == -1)
+                return 99999;
+            if (indexOfQuery < this.citation.length())
+                relevancy--;
+            if (!thisString.matches(".*\\W" + queryWords[i] + "\\W.*"))
                 relevancy++;
         }
-        if (this.citation.toLowerCase().contains("example"))
-            relevancy+=50;
         return relevancy;
     }
 

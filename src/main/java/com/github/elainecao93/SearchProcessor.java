@@ -12,6 +12,7 @@ public class SearchProcessor {
 
     protected String query;
     private String filter;
+    private boolean exactMatch;
 
     /*
     1: User is admin and used an admin command.
@@ -27,7 +28,7 @@ public class SearchProcessor {
         rules = new ArrayList<>();
 
         readFile("/CR.txt", 750000, " ", RuleSource.CR, false);
-        readFile("/CR_glossary.txt", 100000, "\n", RuleSource.CRG, true);
+        readFile("/CR_glossary.txt", 100000, "\r\n", RuleSource.CRG, true);
         readFile("/JAR.txt", 10000, null, RuleSource.JAR, true);
         readFile("/IPG.txt", 100000, null, RuleSource.IPG, false);
         readFile("/MTR.txt", 100000, null, RuleSource.MTR, false);
@@ -93,7 +94,7 @@ public class SearchProcessor {
         return output;
     }
 
-    public SearchProcessor(String input, boolean isAdmin) {
+    public SearchProcessor(String input, boolean isAdmin, boolean exactMatch) {
         this.output = new ArrayList<>();
         input = input.toLowerCase();
         boolean usedAdminCommand = (input.indexOf("@") == 0);
@@ -110,6 +111,8 @@ public class SearchProcessor {
             this.query = input.substring(userIsAdmin, filterIndex);
             this.filter = input.substring(filterIndex+1);
         }
+
+        this.exactMatch = exactMatch;
     }
 
     public ArrayList<String> getOutput() {
@@ -137,8 +140,8 @@ public class SearchProcessor {
             if (this.filter != null && (!this.filter.matches(rules.get(i).getSource().toString().toLowerCase())))
                 continue;
             String ruleStr = rules.get(i).toString();
-            double relevancy = rules.get(i).relevancy(this.query);
-            if (relevancy < 99.0) {
+            double relevancy = rules.get(i).relevancy(this.query, exactMatch);
+            if (relevancy < 99999) {
                 possibleOutputs.put(rules.get(i), relevancy);
             }
             if (possibleOutputs.size() > 100) {
@@ -182,6 +185,10 @@ public class SearchProcessor {
                 this.output.add(0, resultsFound + " results were found. Displaying the " + resultsNum + " most relevant results because an administrator command was run. Use !filter to filter.");
             else
                 this.output.add(0, resultsFound + " results were found. Displaying the " + resultsNum + " most relevant results. Use !filter to filter.");
+        }
+
+        if (resultsFound == 0) {
+            this.output.add("No results found for " + this.query +". Please check for misspellings or alternate spellings.");
         }
 
         this.output.add("Computed in " + (System.currentTimeMillis() - computeStart + " ms"));
