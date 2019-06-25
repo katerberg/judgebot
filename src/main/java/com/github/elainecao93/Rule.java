@@ -56,13 +56,21 @@ public class Rule implements Comparable<Rule>{
         return relevancy;
     }
 
+    public boolean matchesSource(Rule other) {
+        return this.source == other.source && this.citation.trim().equals(other.citation.trim());
+    }
+
     public RuleSource getSource() {
         return this.source;
     }
 
+    public String getRuleText() {
+        return this.ruleText;
+    }
+
     @Override
     public String toString() {
-        return source.toString() + " " + citation + ": " + ruleText;
+        return "**" + source.toString() + " " + citation + "**: " + ruleText;
     }
 
     @Override

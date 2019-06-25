@@ -30,8 +30,8 @@ public class SearchProcessor {
         readFile("/CR.txt", 750000, " ", RuleSource.CR, false);
         readFile("/CR_glossary.txt", 100000, "\r\n", RuleSource.CRG, true);
         readFile("/JAR.txt", 10000, null, RuleSource.JAR, true);
-        readFile("/IPG.txt", 100000, null, RuleSource.IPG, false);
-        readFile("/MTR.txt", 100000, null, RuleSource.MTR, false);
+        readFile("/IPG.txt", 100000, ":", RuleSource.IPG, false);
+        readFile("/MTR.txt", 100000, ":", RuleSource.MTR, false);
     }
 
     private static void readFile(String filename, int bufferlen, String breakchar, RuleSource source, boolean breakline) throws IOException {
@@ -72,19 +72,19 @@ public class SearchProcessor {
             if (len < 3) continue; //page number
             else if (!Character.isAlphabetic(elem.charAt(elem.length()-1)) && len < 90) { //end of paragraph
                 currentRule += " " + elem;
-                output.add(currentTitle + " " + currentSubsection + " " + currentRule);
+                output.add(currentTitle + " " + currentSubsection + ": " + currentRule);
                 currentRule = "";
             }
             else if (Character.isDigit(elem.charAt(0))) { // is a title
                 if (currentRule.length() > 3)
-                    output.add(currentTitle + " " + currentSubsection + " " + currentRule);
+                    output.add(currentTitle + " " + currentSubsection + ": " + currentRule);
                 currentSubsection = "";
                 currentRule = "";
                 currentTitle = elem;
             }
             else if (elem.length() < 40) { //is a subsection header
                 if (currentRule.length() > 3)
-                    output.add(currentTitle + " " + currentSubsection + " " + currentRule);
+                    output.add(currentTitle + " " + currentSubsection + ": " + currentRule);
                 currentSubsection = elem;
                 currentRule = "";
             }
@@ -141,7 +141,6 @@ public class SearchProcessor {
         for (int i=0; i<rules.size(); i++) {
             if (this.filter != null && (!this.filter.matches(rules.get(i).getSource().toString().toLowerCase())))
                 continue;
-            String ruleStr = rules.get(i).toString();
             double relevancy = rules.get(i).relevancy(this.query, exactMatch);
             if (relevancy < 99999) {
                 possibleOutputs.put(rules.get(i), relevancy);
@@ -169,16 +168,23 @@ public class SearchProcessor {
             outputList = outputList.subList(0, resultsNum);
         }
 
-        //sort output
+        //sort remaining output
         ArrayList<Rule> outputRules = new ArrayList<>();
         for (int i=0; i<outputList.size(); i++) {
             outputRules.add(outputList.get(i).getKey());
         }
-        Collections.sort(outputRules);
+        Collections.sort(outputRules); //sorts by rule number
 
         //return results
+        Rule previous = null;
         for (int i=0; i<outputRules.size(); i++) {
-            this.output.add(outputRules.get(i).toString());
+            Rule elem = outputRules.get(i);
+            if (previous != null && previous.matchesSource(elem)) {
+                this.output.add(elem.getRuleText());
+            } else {
+                this.output.add(elem.toString());
+            }
+            previous = elem;
         }
 
         if (resultsFound > resultsNum){
@@ -189,7 +195,7 @@ public class SearchProcessor {
         }
 
         if (resultsFound == 0) {
-            this.output.add("No results found for " + this.query +". Please check for misspellings or alternate spellings.");
+            this.output.add("No results found for \"" + this.query +"\". Please check for misspellings or alternate spellings.");
         }
 
         this.output.add("Computed in " + (System.currentTimeMillis() - computeStart + " ms"));
