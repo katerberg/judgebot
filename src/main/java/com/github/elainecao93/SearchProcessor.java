@@ -7,6 +7,7 @@ public class SearchProcessor {
 
     private static final int MAX_RESULTS = 5;
     private static final int MAX_RESULTS_IF_ADMIN = 10;
+    private static final int MAX_MESSAGE_LENGTH = 2000;
 
     private static ArrayList<Rule> rules;
 
@@ -69,7 +70,7 @@ public class SearchProcessor {
         for (int i=0; i<input.size(); i++) {
             int len = input.get(i).length();
             String elem = input.get(i);
-            if (len < 3) continue; //page number
+            if (len < 3) ; //page number
             else if (!Character.isAlphabetic(elem.charAt(elem.length()-1)) && len < 90) { //end of paragraph
                 currentRule += " " + elem;
                 output.add(currentTitle + " " + currentSubsection + ": " + currentRule);
@@ -82,7 +83,7 @@ public class SearchProcessor {
                 currentRule = "";
                 currentTitle = elem;
             }
-            else if (elem.length() < 40) { //is a subsection header
+            else if (len < 40) { //is a subsection header
                 if (currentRule.length() > 3)
                     output.add(currentTitle + " " + currentSubsection + ": " + currentRule);
                 currentSubsection = elem;
@@ -176,15 +177,30 @@ public class SearchProcessor {
         Collections.sort(outputRules); //sorts by rule number
 
         //return results
-        Rule previous = null;
+        Rule lastRule = null;
         for (int i=0; i<outputRules.size(); i++) {
             Rule elem = outputRules.get(i);
-            if (previous != null && previous.matchesSource(elem)) {
-                this.output.add(elem.getRuleText());
+            String lastString = null;
+            if (lastRule != null)
+                lastString = this.output.remove(this.output.size()-1);
+            if (lastRule != null && lastRule.matchesSource(elem)) {
+                if (lastString.length() + elem.getRuleText().length() + 1 < MAX_MESSAGE_LENGTH){
+                    lastString = lastString + "\n" + elem.getRuleText();
+                    this.output.add(lastString);
+                } else {
+                    this.output.add(lastString);
+                    this.output.add(elem.getRuleText());
+                }
             } else {
-                this.output.add(elem.toString());
+                if (lastRule != null && lastString.length() + elem.toString().length() + 1 < MAX_MESSAGE_LENGTH) {
+                    lastString = lastString + "\n" + elem.toString();
+                    this.output.add(lastString);
+                } else {
+                    this.output.add(lastString);
+                    this.output.add(elem.toString());
+                }
             }
-            previous = elem;
+            lastRule = elem;
         }
 
         if (resultsFound > resultsNum){

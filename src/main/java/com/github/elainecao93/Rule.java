@@ -12,21 +12,21 @@ public class Rule implements Comparable<Rule>{
     public Rule(RuleSource source, String rawText, String breakchar, boolean breakline) {
         this.source = source;
         if (breakchar == null) {
-            this.ruleText = rawText;
+            this.ruleText = rawText.trim();
             this.citation = "";
         }
         else {
             int breakIndex = rawText.indexOf(breakchar);
             try {
-                this.citation = rawText.substring(0, breakIndex);
-                this.ruleText = rawText.substring(breakIndex + 1);
+                this.citation = rawText.substring(0, breakIndex).trim();
+                this.ruleText = rawText.substring(breakIndex + 1).trim();
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("error: " + rawText.length());
                 System.out.println(rawText);
             }
         }
         if (breakline) {
-            this.ruleText = this.ruleText.replace("\n", " ").replace("\r", " ").replace("  ", " ");
+            this.ruleText = this.ruleText.replace("\n", " ").replace("\r", " ").replace("  ", " ").trim();
         }
         this.ruleNum = ruleIndex;
         ruleIndex++;
@@ -57,7 +57,7 @@ public class Rule implements Comparable<Rule>{
     }
 
     public boolean matchesSource(Rule other) {
-        return this.source == other.source && this.citation.trim().equals(other.citation.trim());
+        return this.source == other.source && this.citation.equals(other.citation);
     }
 
     public RuleSource getSource() {
