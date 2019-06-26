@@ -10,7 +10,7 @@ Normally it doesn't force the phrase to match exactly, but you can make it do th
 
 {{"summoning sickness"}}
 
-Development is currently ongoing and the bot will be deployed when ready.
+This bot is pretty new so please report bugs to the bot owner.
 
 This bot was built with Javacord (https://javacord.org/) and uses data that is © Wizards of the Coast. The code is licensed under a variant of beerware:
 
