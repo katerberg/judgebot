@@ -39,8 +39,10 @@ public class init {
             if (commands.size() != 0) {
                 for (int i=0; i<commands.size(); i++) {
                     ArrayList<String> payload = parseCommand(commands.get(i), isAdmin);
-                    for (int j = 0; j < payload.size(); j++)
+                    for (int j = 0; j < payload.size(); j++){
+                        System.out.println(payload.get(j));
                         event.getChannel().sendMessage(payload.get(j));
+                    }
                 }
             }
         });

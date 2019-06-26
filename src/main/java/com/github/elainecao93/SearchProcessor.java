@@ -37,8 +37,11 @@ public class SearchProcessor {
 
     private static void readFile(String filename, int bufferlen, String breakchar, RuleSource source, boolean breakline) throws IOException {
         InputStream in = SearchProcessor.class.getResourceAsStream(filename);
-        byte[] buffer = new byte[bufferlen];
-        System.out.println(in.read(buffer));
+        BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+        char[] buffer = new char[bufferlen];
+        System.out.println(br.read(buffer));
+
+        in.close();
 
         if (source == RuleSource.IPG || source == RuleSource.MTR) {
             ArrayList<String> input = parseFile(buffer);
@@ -47,7 +50,7 @@ public class SearchProcessor {
             }
         }
         else {
-            String[] inputArray = new String(buffer, "UTF-8").split("\\r?\\n\\r?\\n");
+            String[] inputArray = new String(buffer).split("\\r?\\n\\r?\\n");
             for (int i = 0; i < inputArray.length; i++) {
                 if (inputArray[i].length() > 1) {
                     rules.add(new Rule(source, inputArray[i], breakchar, breakline));
@@ -56,16 +59,14 @@ public class SearchProcessor {
         }
     }
 
-    public static ArrayList<String> parseFile(byte[] buffer) throws IOException {
+    public static ArrayList<String> parseFile(char[] buffer) throws IOException {
         ArrayList<String> output = new ArrayList<>();
-        String[] inputString = new String(buffer, "UTF-8").split("\\r\\n");
+        String[] inputString = new String(buffer).split("\\r\\n");
         ArrayList<String> input = new ArrayList<>(Arrays.asList(inputString));
 
         String currentTitle = "";
         String currentSubsection = "";
         String currentRule = "";
-
-        System.out.println(input.size() + " len");
 
         for (int i=0; i<input.size(); i++) {
             int len = input.get(i).length();
@@ -131,8 +132,6 @@ public class SearchProcessor {
             this.output.add("Ain't no rule says a dog can't play Magic!");
             return this.output;
         }
-
-        long computeStart = System.currentTimeMillis();
 
         this.output.clear();
 
@@ -213,8 +212,6 @@ public class SearchProcessor {
         if (resultsFound == 0) {
             this.output.add("No results found for \"" + this.query +"\". Please check for misspellings or alternate spellings.");
         }
-
-        this.output.add("Computed in " + (System.currentTimeMillis() - computeStart + " ms"));
 
         return this.output;
 
